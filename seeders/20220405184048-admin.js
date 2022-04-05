@@ -20,7 +20,7 @@ module.exports = {
           password:
             '$2b$10$7ovHDrtaMe.FmutXxEhnWOo7rDOdTloUMgqms5RXYmL5/4dfM.OTm', //123456
           name: 'admin',
-          status: 'admin',
+          role: 'admin',
         },
       ],
       {}
