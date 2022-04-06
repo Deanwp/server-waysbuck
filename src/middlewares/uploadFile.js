@@ -1,9 +1,7 @@
-// import package here
 const multer = require("multer")
 
 
 exports.uploadFile = (imageFile) => {
-  // code here
   const storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, "uploads")
