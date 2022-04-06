@@ -1,5 +1,4 @@
 const { beverage} = require("../../models");
-const cloudinary = require('../utils/cloudinary')
 
 exports.getBeverages = async (req, res) => {
   try {
@@ -33,16 +32,10 @@ exports.getBeverages = async (req, res) => {
 exports.addBeverage = async (req, res) => {
   try {
     const { title,price } = req.body
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: 'dumbways_file',
-      use_filename: true,
-      unique_filename: true,
-    });
-
     let newBeverage = await beverage.create({
       title,
       price,
-      image: result.public_id,
+      image: req.file.filename,
     })
 
     newBeverage = JSON.parse(JSON.stringify(newBeverage))
