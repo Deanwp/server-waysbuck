@@ -15,7 +15,7 @@ exports.getToppings = async (req, res) => {
     data = data.map((item) => {
       return {
         ...item,
-        image: process.env.FILE_PATH + item.image
+        image: process.env.PATH_FILE + item.image
       }
     })
     res.send({
@@ -50,7 +50,7 @@ exports.addTopping = async (req, res) => {
 
     newTopping = {
       ...newTopping,
-      image: process.env.FILE_PATH + newTopping.image
+      image: process.env.PATH_FILE + newTopping.image
     }
     
     res.send({
@@ -116,7 +116,7 @@ exports.updateTopping = async (req, res) => {
    updateTopping = {
     title : req.body.title,
     price : req.body.price,
-    image : process.env.FILE_PATH + updateTopping.image
+    image : process.env.PATH_FILE + updateTopping.image
    }
   
     res.send({
