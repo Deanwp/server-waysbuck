@@ -28,7 +28,7 @@ router.delete('/user/:id', deleteUser)
 router.get("/check-auth", auth, checkAuth);
 
 router.get('/beverages', getBeverages)
-router.post('/beverage', auth, uploadFile("image"), addBeverage)
+router.post('/beverage', auth, addBeverage)
 router.get('/beverage/:id', getBeverage)
 router.patch('/beverage/:id', auth, uploadFile("image"), updateBeverage)
 router.delete('/beverage/:id', auth, deleteBeverage)
