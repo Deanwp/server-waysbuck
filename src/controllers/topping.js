@@ -1,4 +1,6 @@
 const {topping} = require("../../models");
+const cloudinary = require('../utils/cloudinary')
+
 
 exports.getToppings = async (req, res) => {
   try {
@@ -32,11 +34,16 @@ exports.getToppings = async (req, res) => {
 exports.addTopping = async (req, res) => {
   try {
     const { title,price } = req.body;
-    
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'dumbways_file',
+      use_filename: true,
+      unique_filename: true,
+    });
+
     let newTopping = await topping.create({
       title,
       price,
-      image: req.file.filename,
+      image: result.public_id,
     })
 
     newTopping = JSON.parse(JSON.stringify(newTopping))
