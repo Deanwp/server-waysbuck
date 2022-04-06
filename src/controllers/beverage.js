@@ -33,7 +33,7 @@ exports.getBeverages = async (req, res) => {
 exports.addBeverage = async (req, res) => {
   try {
     const { title,price } = req.body
-    const result = await cloudinary.uploader.upload(req.file.path, {
+    const result = await cloudinary.uploader.upload(req.path.file, {
       folder: 'dumbways_file',
       use_filename: true,
       unique_filename: true,
