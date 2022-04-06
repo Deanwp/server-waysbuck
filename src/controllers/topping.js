@@ -35,7 +35,7 @@ exports.addTopping = async (req, res) => {
     const data = {
       title: req.body.title,
       price: req.body.price,
-      // image: req.file.filename,
+      image: req.file.filename,
     }
 
     let newTopping = await topping.create(data)

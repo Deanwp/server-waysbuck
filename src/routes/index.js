@@ -34,7 +34,7 @@ router.patch('/beverage/:id', auth, uploadFile("image"), updateBeverage)
 router.delete('/beverage/:id', auth, deleteBeverage)
 
 router.get('/toppings', getToppings)
-router.post('/topping', auth, addTopping)
+router.post('/topping', auth, uploadFile("image"), addTopping)
 router.get('/topping/:id', getTopping)
 router.patch('/topping/:id', auth, uploadFile("image"), updateTopping)
 router.delete('/topping/:id', auth, deleteTopping)
