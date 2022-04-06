@@ -4,7 +4,7 @@ const multer = require("multer")
 exports.uploadFile = (imageFile) => {
   const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, "uploads")
+      cb(null, 'uploads')
     },
     filename: function(req, file, cb){
       cb(null, Date.now() + "-" + file.originalname.replace(/\s/g, ""))
@@ -23,8 +23,8 @@ exports.uploadFile = (imageFile) => {
     cb(null, true)
   }
 
-  const sizeInMB = 10
-  const maxSize = sizeInMB * 1000 * 1000
+  const sizeInMB = 10;
+  const maxSize = sizeInMB * 1000 * 1000;
 
   const upload = multer({
     storage,
@@ -38,11 +38,6 @@ exports.uploadFile = (imageFile) => {
     upload(req, res, function(err) {
       if (req.fileValidationError)
         return res.status(400).send(req.fileValidationError)
-
-      if (!req.file && !err)
-        return res.status(400).send({
-          message: "Please select files to upload"
-        })
 
       if (err) {
         if (err.code === "LIMIT_FILE_SIZE") {
