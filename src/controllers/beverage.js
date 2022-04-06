@@ -1,5 +1,4 @@
 const { beverage} = require("../../models");
-const cloudinary = require('../utils/cloudinary')
 
 exports.getBeverages = async (req, res) => {
   try {
@@ -14,7 +13,7 @@ exports.getBeverages = async (req, res) => {
     data = data.map((item) => {
       return {
         ...item,
-        image: process.env.PATH_FILE + item.image
+        image: process.env.FILE_PATH + item.image
       }
     })
     res.send({
@@ -33,26 +32,17 @@ exports.getBeverages = async (req, res) => {
 exports.addBeverage = async (req, res) => {
   try {
     const { title,price } = req.body
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: 'dumbways_file',
-      use_filename: true,
-      unique_filename: true,
-    });
-
-    const data = {
-      title: req.body.title,
-      price: req.body.price,
-      image: result.public_id,
-    };
-
-
-    let newBeverage = await beverage.create(data)
+    let newBeverage = await beverage.create({
+      title,
+      price,
+      image: req.file.filename,
+    })
 
     newBeverage = JSON.parse(JSON.stringify(newBeverage))
 
     newBeverage = {
       ...newBeverage,
-      image: process.env.PATH_FILE + newBeverage.image
+      image: process.env.FILE_PATH + newBeverage.image
     }
     
     res.send({
@@ -87,7 +77,7 @@ exports.getBeverage = async (req, res) => {
 
     data = {
       ...data,
-      image: process.env.PATH_FILE + data.image,
+      image: process.env.FILE_PATH + data.image,
     };
 
     res.send({
@@ -122,7 +112,7 @@ exports.updateBeverage = async (req, res) => {
    updateBeverage = {
     title : req.body.title,
     price : req.body.price,
-    image : process.env.PATH_FILE + updateBeverage.image
+    image : process.env.FILE_PATH + updateBeverage.image
    }
   
     res.send({
